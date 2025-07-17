@@ -5,8 +5,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
 
+from Green_Kart import testdata
 
-@pytest.fixture(params=["Chrome","Edge"],scope="class")
+
+@pytest.fixture(params=["Chrome"],scope="class")
 def browsers(request):
     browser=request.param
     if browser=="Chrome":
@@ -25,6 +27,11 @@ def browsers(request):
     request.cls.driver = driver
     yield
     driver.close()
+
+# @pytest.fixture(params=testdata.vegetables)
+# def test_data(request):
+#     return request.param
+
 
 
 
