@@ -21,7 +21,7 @@ def browsers(request):
     else :
             driver=webdriver.Firefox(service=Service(GeckoDriverManager().install()))
 
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(12)
     driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
     driver.maximize_window()
     request.cls.driver = driver
