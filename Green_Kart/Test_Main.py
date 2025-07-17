@@ -1,16 +1,17 @@
 import pytest
-from selenium.webdriver.common.by import By
 
+from Green_Kart import testdata
 from Green_Kart.Pages.Homepage import Homepage
-from Rahulshetty_login_page.Pages.Cart import Cart
+from Green_Kart.Pages.Cart import Cart
 
 
 @pytest.mark.usefixtures("browsers")
 class Test_green():
 
+
     def test_main(self):
         homepg= Homepage(self.driver)
-        homepg.add_products()
+        homepg.add_products(testdata.vegetables)
         homepg.click_on_cart()
 
         cartpg=Cart(self.driver)

@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
-from Green_Kart.conftest import test_data
+from Green_Kart.testdata import vegetables
 
 
 class Cart():
@@ -15,7 +15,7 @@ class Cart():
         for row in rows:
             product_name = row.find_element(By.XPATH, './td[2]/p').text
             price_text = row.find_element(By.XPATH, './td[4]').text
-            if product_name in [test_data]:
+            if product_name in vegetables:
                 total_price += int(price_text)
         print("Total price of Brocolli and Carrot is:", total_price)
 
