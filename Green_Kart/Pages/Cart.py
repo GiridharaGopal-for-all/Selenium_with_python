@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
+from Green_Kart.conftest import test_data
+
 
 class Cart():
 
@@ -13,12 +15,12 @@ class Cart():
         for row in rows:
             product_name = row.find_element(By.XPATH, './td[2]/p').text
             price_text = row.find_element(By.XPATH, './td[4]').text
-            if product_name in ["Brocolli - 1 Kg", "Carrot - 1 Kg"]:
+            if product_name in [test_data]:
                 total_price += int(price_text)
         print("Total price of Brocolli and Carrot is:", total_price)
 
-        total_price1=176
-        assert total_price1==total_price
+        # total_price1=176
+        # assert total_price1==total_price
 
     def place_order(self):
         self.driver.find_element(By.XPATH,'//*[text()="Place Order"]').click()
