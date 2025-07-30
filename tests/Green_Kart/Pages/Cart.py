@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
-from Green_Kart.testdata import vegetables
+from tests.Green_Kart.testdata import vegetables
 
 
 class Cart():

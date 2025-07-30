@@ -5,8 +5,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
 
-from Green_Kart import testdata
-
 
 @pytest.fixture(params=["Chrome"],scope="class",autouse=True)
 def browsers(request):

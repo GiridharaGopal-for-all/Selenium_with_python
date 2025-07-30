@@ -1,8 +1,6 @@
-import pytest
-
-from Green_Kart import testdata
-from Green_Kart.Pages.Homepage import Homepage
-from Green_Kart.Pages.Cart import Cart
+from tests.Green_Kart import testdata
+from tests.Green_Kart.Pages.Homepage import Homepage
+from tests.Green_Kart.Pages.Cart import Cart
 
 
 # @pytest.mark.usefixtures("browsers")
