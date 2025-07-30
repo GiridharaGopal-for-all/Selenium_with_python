@@ -28,3 +28,9 @@ class mobile():
                 btn = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, './/button[contains(@class,"btn-info")]')))
                 btn.click()
                 break
+
+    def verifying_text(self):
+        if "Copyright © ProtoCommerce 2018" in self.driver.page_source:
+            print("available")
+        else:
+            print("not available")
