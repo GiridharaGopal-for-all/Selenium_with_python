@@ -7,22 +7,26 @@ from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
 
 
-@pytest.fixture(params=["Chrome"], scope="class", autouse=True)
+@pytest.fixture(params=["Chrome"],scope="class",autouse=True)
 def browsers(request):
-    browser = request.param
+    browser=request.param
     if browser == "Chrome":
         chrome_options = Options()
-        chrome_options.add_argument("--headless")  # Run in headless mode
+        chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--disable-gpu")  # Optional
-        chrome_options.add_argument("--remote-debugging-port=9222")  # Optional
-
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--window-size=1920,1080")
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-        driver.maximize_window()
-        request.cls.driver = driver
-        yield
-        driver.quit()
+
+
+
+    driver.implicitly_wait(12)
+    driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
+    driver.maximize_window()
+    request.cls.driver = driver
+    yield
+    driver.close()
 
 # @pytest.fixture(params=testdata.vegetables)
 # def test_data(request):
