@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
+from tests.Rahulshetty_login_page import data
+
 
 @pytest.fixture(scope='class')
 def webbrowser(request):
@@ -37,7 +39,7 @@ def csv():
     return data_list
 
 
-@pytest.fixture(params=testdata.names)
+@pytest.fixture(params=data.names)
 def data(request):
     return request.param
 
