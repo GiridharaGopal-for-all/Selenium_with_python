@@ -1,9 +1,9 @@
 import pytest
 
-from Rahulshetty_login_page.Pages.Home import mobile
-from Rahulshetty_login_page.Pages.Login import Login_fn
-from Rahulshetty_login_page.conftest import login_datas, csv, data
-from Rahulshetty_login_page.utilis import xl
+from tests.Rahulshetty_login_page.Pages.Home import mobile
+from tests.Rahulshetty_login_page.Pages.Login import Login_fn
+from tests.Rahulshetty_login_page.conftest import login_datas, csv
+from tests.Rahulshetty_login_page.utilis import xl
 
 
 @pytest.mark.usefixtures('webbrowser')
