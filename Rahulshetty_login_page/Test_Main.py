@@ -35,6 +35,9 @@ class Test_Rahul():
     def test_testdatafile(self,data):
         login = Login_fn(self.driver)
         login.Username_Password(data["username"],data["password"])
+        home=mobile(self.driver)
+        home.verifying_text()
+
 
     
 

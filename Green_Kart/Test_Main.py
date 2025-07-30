@@ -5,7 +5,7 @@ from Green_Kart.Pages.Homepage import Homepage
 from Green_Kart.Pages.Cart import Cart
 
 
-@pytest.mark.usefixtures("browsers")
+# @pytest.mark.usefixtures("browsers")
 class Test_green():
 
 
