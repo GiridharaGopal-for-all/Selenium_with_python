@@ -40,8 +40,8 @@ jobs:
           name: pytest-html-report
           path: report.html
 
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: selenium-screenshots
-          path: tests/Screenshots
+#      - name: Upload screenshots
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: selenium-screenshots
+#          path: tests/Screenshots

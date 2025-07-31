@@ -36,33 +36,33 @@ import pytest
 import os
 from pytest_html import extras
 
-import pytest
-import os
-from pytest_html import extras
-
-@pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    outcome = yield
-    report = outcome.get_result()
-
-    if report.when == "call":
-        driver = getattr(item.cls, "driver", None)
-        if driver is not None:
-            screenshot_dir = "tests/Screenshots"
-            os.makedirs(screenshot_dir, exist_ok=True)
-
-            file_name = report.nodeid.replace("::", "_").replace("/", "_") + ".png"
-            screenshot_path = os.path.join(screenshot_dir, file_name)
-            driver.save_screenshot(screenshot_path)
-
-            with open(screenshot_path, "rb") as image_file:
-                image_bytes = image_file.read()
-            extra_image = extras.embed(image_bytes, mime_type="image/png", extension="png")
-
-            if hasattr(report, "extra"):
-                report.extra.append(extra_image)
-            else:
-                report.extra = [extra_image]
+# import pytest
+# import os
+# from pytest_html import extras
+#
+# @pytest.hookimpl(hookwrapper=True)
+# def pytest_runtest_makereport(item, call):
+#     outcome = yield
+#     report = outcome.get_result()
+#
+#     if report.when == "call":
+#         driver = getattr(item.cls, "driver", None)
+#         if driver is not None:
+#             screenshot_dir = "tests/Screenshots"
+#             os.makedirs(screenshot_dir, exist_ok=True)
+#
+#             file_name = report.nodeid.replace("::", "_").replace("/", "_") + ".png"
+#             screenshot_path = os.path.join(screenshot_dir, file_name)
+#             driver.save_screenshot(screenshot_path)
+#
+#             with open(screenshot_path, "rb") as image_file:
+#                 image_bytes = image_file.read()
+#             extra_image = extras.embed(image_bytes, mime_type="image/png", extension="png")
+#
+#             if hasattr(report, "extra"):
+#                 report.extra.append(extra_image)
+#             else:
+#                 report.extra = [extra_image]
 
 
 
