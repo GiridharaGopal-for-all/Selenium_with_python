@@ -36,6 +36,10 @@ import pytest
 import os
 from pytest_html import extras
 
+import pytest
+import os
+from pytest_html import extras
+
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
@@ -51,7 +55,6 @@ def pytest_runtest_makereport(item, call):
             screenshot_path = os.path.join(screenshot_dir, file_name)
             driver.save_screenshot(screenshot_path)
 
-            # ✅ Embed screenshot inline using extras.embed
             with open(screenshot_path, "rb") as image_file:
                 image_bytes = image_file.read()
             extra_image = extras.embed(image_bytes, mime_type="image/png", extension="png")
@@ -60,6 +63,7 @@ def pytest_runtest_makereport(item, call):
                 report.extra.append(extra_image)
             else:
                 report.extra = [extra_image]
+
 
 
 
