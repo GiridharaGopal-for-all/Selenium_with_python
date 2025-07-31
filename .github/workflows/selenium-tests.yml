@@ -3,9 +3,9 @@ name: Run Selenium Tests on Push
 on:
   push:
     branches:
-      - main  # Adjust if using a different branch
+      - main
   schedule:
-    - cron: '30 16 * * 4'  # Runs automatically every Thursday 10 PM IST
+    - cron: '*/5 * * * *'
 
 jobs:
   run-tests:
@@ -39,7 +39,7 @@ jobs:
             --self-contained-html
 
       - name: Upload HTML report as artifact
-        if: always()  # <--- 👈 ensures this runs even if test fails
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pytest-html-report
