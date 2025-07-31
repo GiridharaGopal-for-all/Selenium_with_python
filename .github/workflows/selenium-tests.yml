@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Adjust if using a different branch
+  schedule:
+    - cron: '30 16 * * 4'  # Runs automatically every Thursday 10 PM IST
 
 jobs:
   run-tests:
