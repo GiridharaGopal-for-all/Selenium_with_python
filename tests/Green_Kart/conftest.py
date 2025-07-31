@@ -47,11 +47,13 @@ def pytest_runtest_makereport(item, call):
             screenshot_path = os.path.join(screenshot_dir, file_name)
             driver.save_screenshot(screenshot_path)
 
-            # Attach the screenshot to the report
+            # ✅ Embed the screenshot directly in HTML (important!)
+            extra_image = extras.image(screenshot_path, mime_type='image/png', embed=True)
+
             if hasattr(report, "extra"):
-                report.extra.append(extras.image(screenshot_path))
+                report.extra.append(extra_image)
             else:
-                report.extra = [extras.image(screenshot_path)]
+                report.extra = [extra_image]
 
 
 
