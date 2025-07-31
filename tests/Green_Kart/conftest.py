@@ -28,6 +28,33 @@ def browsers(request):
     yield
     driver.close()
 
+import pytest
+import os
+
+# Hook to add screenshot for each test
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    # Only take screenshot on test call stage
+    if report.when == "call":
+        driver = item.cls.driver  # assumes self.driver is defined in test class
+
+        screenshot_dir = "tests/Screenshots"
+        os.makedirs(screenshot_dir, exist_ok=True)
+
+        screenshot_path = os.path.join(screenshot_dir, f"{report.nodeid.replace('::', '_')}.png")
+        driver.save_screenshot(screenshot_path)
+
+        # Attach to HTML report
+        if hasattr(report, "extra"):
+            from pytest_html import extras
+            report.extra.append(extras.image(screenshot_path))
+        else:
+            report.extra = [extras.image(screenshot_path)]
+
+
 # @pytest.fixture(params=testdata.vegetables)
 # def test_data(request):
 #     return request.param
