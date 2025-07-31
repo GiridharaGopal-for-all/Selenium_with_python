@@ -25,12 +25,14 @@ jobs:
           pip install --upgrade pytest-html
 
 
-      - name: Run Pytest tests and generate HTML report
+      - name: Run Pytest tests in parallel and generate HTML report
         run: |
-          mkdir -p tests/Screenshots  # Ensure screenshot dir exists
-          pytest tests/ \
+          mkdir -p tests/Screenshots
+          pytest tests/ -v -s \
             --disable-warnings \
             --maxfail=5 \
+            --reruns 2 \
+            -n auto \
             --html=report.html \
             --self-contained-html
 
@@ -40,8 +42,4 @@ jobs:
         with:
           name: pytest-html-report
           path: report.html
-#      - name: Upload screenshots
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: selenium-screenshots
-#          path: tests/Screenshots
+
