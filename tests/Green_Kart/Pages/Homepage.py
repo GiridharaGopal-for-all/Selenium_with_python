@@ -22,6 +22,7 @@ class Homepage():
     def click_on_cart(self):
         self.driver.find_element(By.XPATH,'//img[@alt="Cart"]').click()
         self.driver.find_element(By.XPATH,'//button[text()="PROCEED TO CHECKOUT"]').click()
+        self.driver.save_screenshot("tests/Screenshots/login_result.png")
 
 
 
