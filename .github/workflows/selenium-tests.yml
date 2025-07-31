@@ -3,7 +3,7 @@ name: Run Selenium Tests on Push
 on:
   push:
     branches:
-      - main  # Change if you're using another branch (e.g., "master" or "dev")
+      - main
 
 jobs:
   run-tests:
@@ -29,8 +29,7 @@ jobs:
           pytest tests/ --disable-warnings --maxfail=5 --html=report.html
 
       - name: Upload HTML report as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pytest-html-report
           path: report.html
-
