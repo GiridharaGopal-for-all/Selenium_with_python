@@ -35,11 +35,11 @@ jobs:
             --self-contained-html
 
       - name: Upload HTML report as artifact
+        if: always()  # <--- 👈 ensures this runs even if test fails
         uses: actions/upload-artifact@v4
         with:
           name: pytest-html-report
           path: report.html
-
 #      - name: Upload screenshots
 #        uses: actions/upload-artifact@v4
 #        with:
