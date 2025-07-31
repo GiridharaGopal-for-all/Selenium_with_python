@@ -31,6 +31,6 @@ class Cart():
 
     def verfiication(self):
         self.driver.find_element(By.XPATH,'//*[text()="Proceed"]').click()
-        error="Please accept Terms & Conditions - Required"
+        error="Please accept Terms & Conditions - Requireds"
         r=self.driver.find_element(By.XPATH,"//*[@class='errorAlert']/b").text
         assert error == r
