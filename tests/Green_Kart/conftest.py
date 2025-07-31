@@ -3,8 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.edge.service import Service as EdgeService
+from pytest_html import extras
 
 
 @pytest.fixture(params=["Chrome"],scope="class",autouse=True)
@@ -31,33 +30,31 @@ def browsers(request):
 import pytest
 import os
 
-# Hook to add screenshot for each test
+
+
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
 
-    # Only take screenshot on test call stage
     if report.when == "call":
-        driver = item.cls.driver  # assumes self.driver is defined in test class
+        driver = getattr(item.cls, "driver", None)
+        if driver is not None:
+            screenshot_dir = "tests/Screenshots"
+            os.makedirs(screenshot_dir, exist_ok=True)
 
-        screenshot_dir = "tests/Screenshots"
-        os.makedirs(screenshot_dir, exist_ok=True)
+            file_name = report.nodeid.replace("::", "_").replace("/", "_") + ".png"
+            screenshot_path = os.path.join(screenshot_dir, file_name)
+            driver.save_screenshot(screenshot_path)
 
-        screenshot_path = os.path.join(screenshot_dir, f"{report.nodeid.replace('::', '_')}.png")
-        driver.save_screenshot(screenshot_path)
-
-        # Attach to HTML report
-        if hasattr(report, "extra"):
-            from pytest_html import extras
-            report.extra.append(extras.image(screenshot_path))
-        else:
-            report.extra = [extras.image(screenshot_path)]
+            # Attach the screenshot to the report
+            if hasattr(report, "extra"):
+                report.extra.append(extras.image(screenshot_path))
+            else:
+                report.extra = [extras.image(screenshot_path)]
 
 
-# @pytest.fixture(params=testdata.vegetables)
-# def test_data(request):
-#     return request.param
+
 
 
 
