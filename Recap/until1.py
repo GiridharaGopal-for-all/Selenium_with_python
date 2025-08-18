@@ -1,8 +1,9 @@
+car = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
 
-for i in range(2,20):
-    for j in range(2,i):
-        if (i%j)==0:
-            break
+x = car.setdefault("model", "Bronco")
 
-    else:
-        print(i)
+print(x)
